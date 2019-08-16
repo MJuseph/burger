@@ -1,45 +1,39 @@
+<div class="container">
+<img class="img-fluid" src="https://hips.hearstapps.com/del.h-cdn.co/assets/17/22/1496164974-delish-veggie-burgers-2.jpg">
+
+<h1>Eat-Da-Burger</h1>
+
 <div class="row">
-  <center>
-    <!-- Left side (ready to eat) -->
-    <div class="col-md-6">
-      <h4 class="red_font">Ready to eat!</h4>
-      <div id="ready_to_eat">
+<div class= "col-4">
+<h2>To be eaten!</h2>
+<ul>
+  {{#each burgers}}
+      {{#unless eaten}}
+    {{> burger-block devour=false}}
+        {{/unless}}
+  {{/each}}
+</ul>
+</div>
+<div class= "col-4"></div>
+<div class= "col-4">
+<h2>Eaten!</h2>
+<ul>
+  {{#each burgers}}
+      {{#if eaten}}
+    {{> burger-block devour=true}}
+        {{/if}}
+  {{/each}}
+</ul>
+</div>
+</div>
 
-        <!-- Dynamically Insert Ready Burgers Here -->
-        {{#each burgers}}
-          {{#unless devoured}}
-          <form action="burger/eat/{{id}}" method="POST">
-            <div class="input-group">
-              <li class="form-control">{{id}}. {{burger_name}}</li>
-                <span class="input-group-btn">
-                  <button class="btn btn-success devour-button" type="submit">Devour It!</button>
-                </span>
-            </div>
-          </form>
-          {{/unless}}
-        {{/each}}
+<form class="create-form">
 
-      </div>
-    </div>
+  <div class="form-group">
+    <label for="burger">Burger Name:</label>
+    <input type="text" id="burger" name="name">
+    <button class = "btn btn-primary" type="submit">Add Burger</button>
+  </div>
 
-    <!-- Right side (already eaten) -->
-    <div class="col-md-6">
-      <h4 class="red_font">Already eaten!</h4>
-      <div id="already_eaten">
-
-        <!-- Dynamically Insert Eaten Burgers Here -->
-        {{#each burgers}}
-          {{#if this.devoured}}
-            <div class="input-group">
-              <li class="form-control">{{this.id}}. {{this.burger_name}}</li>
-              <span class="input-group-btn">
-                <button class="btn btn-info whine-button" type="button">Whine!</button>
-              </span>
-            </div>
-          {{/if}}
-        {{/each}}
-
-      </div>
-    </div>
-  </center>
+</form>
 </div>
